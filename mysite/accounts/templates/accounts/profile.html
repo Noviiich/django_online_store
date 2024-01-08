@@ -1,0 +1,9 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<h1>Профиль пользователя: {{ profile.user.username }}</h1>
+<p>Email: {{ profile.user.email }}</p>
+<p>Bio: {{ profile.bio }}</p>
+<p>Website: {{ profile.website }}</p>
+{% endblock %}
+

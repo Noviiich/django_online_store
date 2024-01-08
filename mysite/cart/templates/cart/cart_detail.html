@@ -1,0 +1,56 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Ваша Корзина</h2>
+
+    <!-- Таблица с товарами в корзине -->
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Товар</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Стоимость</th>
+            <th></th> <!-- Колонка для кнопки удаления -->
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.product.price }}</td>
+            <td>
+                <form action="{% url 'cart:cart_update' item.product.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="subtract">
+                    <button type="submit">-</button>
+                </form>
+
+                {{ item.quantity }}
+
+                <form action="{% url 'cart:cart_update' item.product.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="add">
+                    <button type="submit">+</button>
+                </form>
+            </td>
+            <td>{{ item.total_price }}</td>
+            <td>
+                <a href="{% url 'cart:cart_remove' item.product.id %}" class="btn btn-danger btn-sm">Удалить</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">Ваша корзина пуста</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Кнопка для оформления заказа -->
+    <div class="text-right">
+
+    </div>
+</div>
+{% endblock %}

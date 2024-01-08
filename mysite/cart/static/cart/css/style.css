@@ -1,0 +1,8 @@
+.quantity-controls {
+    display: flex;
+    align-items: center;
+}
+
+.img-thumbnail {
+    object-fit: cover;
+}
